@@ -33,6 +33,7 @@ GEM
     json (1.8.3)
     multi_json (1.11.2)
     multi_test (0.1.2)
+    net-ssh (3.0.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -62,6 +63,7 @@ DEPENDENCIES
   aruba
   codeclimate-test-reporter
   fakefs
+  net-ssh
   rspec
   rspec-collection_matchers
   simplecov
