@@ -8,6 +8,12 @@ module Bar
         `bar bench` executes a configured benchmark and collects the output
       LONGDESC
 
+      option :hosts, type: :array, default: [], aliases: '-h',
+                     desc: 'the hosts data should be collected from'
+
+      option :output, type: :string, default: '/tmp', aliases: '-o',
+                      desc: 'the output directory for collected data'
+
       def bench
         # Open pipes for stdin/stdout/stderr
         r_in, w_in = IO.pipe

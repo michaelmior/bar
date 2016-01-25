@@ -28,3 +28,29 @@ class Object
     self
   end
 end
+
+# Extend Hash to allow merging values containing arrays
+class Hash
+  # Like #merge but when encountering an array, add new values
+  def merge_with_arrays(other)
+    merged = {}
+
+    each do |k, v|
+      v2 = other[k]
+
+      case v
+      when Array
+        # Combine the two arrays in the result
+        merged[k] = v.concat(v2).uniq
+      when Hash
+        # Recursively merge the corresponding hashes
+        merged[k] = v.merge_with_arrays(v2)
+      else
+        # Override the value if something new was specified
+        merged[k] = other.key?(k) ? v2 : v
+      end
+    end
+
+    merged
+  end
+end
