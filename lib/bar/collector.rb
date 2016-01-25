@@ -18,4 +18,12 @@ module Bar
       output
     end
   end
+
+  DEFAULT_COLLECTORS = {
+    hdparm:      'sudo hdparm -I /dev/[sh]d[a-z]',
+    ifconfig:    'ifconfig -a',
+    lsb_release: 'lsb_release -a',
+    lspci:       'lspci -vmm',
+    route:       'route -n'
+  }
 end

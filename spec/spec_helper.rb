@@ -7,9 +7,9 @@
 
 require 'simplecov' unless RUBY_PLATFORM == 'java'
 
-require 'rspec/collection_matchers'
 require 'fakefs/safe'
 require 'fakefs/spec_helpers'
+require 'rspec/collection_matchers'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
@@ -41,6 +41,17 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  # Ensure the temporary directory for Aruba is created
+  config.before(:each) do
+    FakeFS.activate!
+    aruba_tmp_path = File.join(File.dirname(__FILE__), '../tmp/aruba')
+    FileUtils.mkdir_p(aruba_tmp_path)
+  end
+
+  config.after(:each) do
+    FakeFS.deactivate!
+  end
 end
 
 require 'bar'
