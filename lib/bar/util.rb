@@ -33,24 +33,18 @@ end
 class Hash
   # Like #merge but when encountering an array, add new values
   def merge_with_arrays(other)
-    merged = {}
-
-    each do |k, v|
-      v2 = other[k]
-
-      case v
+    merge(other) do |_k, v1, v2|
+      case v1
       when Array
         # Combine the two arrays in the result
-        merged[k] = v.concat(v2).uniq
+        v1.clone.concat(v2).uniq
       when Hash
         # Recursively merge the corresponding hashes
-        merged[k] = v.merge_with_arrays(v2)
+        v1.merge_with_arrays(v2)
       else
         # Override the value if something new was specified
-        merged[k] = other.key?(k) ? v2 : v
+        v2
       end
     end
-
-    merged
   end
 end

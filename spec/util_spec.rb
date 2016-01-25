@@ -21,6 +21,13 @@ module Bar
 
         expect(h1.merge_with_arrays(h2)[:foo]).to eq('baz')
       end
+
+      it 'keeps non-conflicting keys from both hashes' do
+        h1 = { foo: 'bar' }
+        h2 = { baz: 'quux' }
+
+        expect(h1.merge_with_arrays(h2)).to eq({ foo: 'bar', baz: 'quux' })
+      end
     end
   end
 end
