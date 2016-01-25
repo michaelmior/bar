@@ -15,13 +15,11 @@ module Bar
 
       # Add the possibility to set defaults via configuration
       def options
-        return @options unless @options.empty?
-        @options = super
-        return @options unless File.exist? CONFIG_FILE_NAME
+        options = super
+        return options unless File.exist? CONFIG_FILE_NAME
 
         defaults = YAML.load_file(CONFIG_FILE_NAME).deep_symbolize_keys || {}
-        @options = Thor::CoreExt::HashWithIndifferentAccess \
-                   .new(defaults.merge(@options))
+        Thor::CoreExt::HashWithIndifferentAccess.new(defaults.merge(options))
       end
     end
   end
