@@ -52,6 +52,9 @@ RSpec.configure do |config|
   config.after(:each) do
     FakeFS.deactivate!
   end
+
+  # Add a helper module for working with configuration files
+  config.include ConfigHelper
 end
 
 require 'bar'

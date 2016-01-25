@@ -17,9 +17,11 @@ module Bar
       def options
         return @options if @options_parsed
         options = super
-        return options unless File.exist? CONFIG_FILE_NAME
+        config_path = File.join(File.dirname(__FILE__),
+                                '../..', CONFIG_FILE_NAME)
+        return options unless File.exist? config_path
 
-        defaults = YAML.load_file(CONFIG_FILE_NAME).deep_symbolize_keys || {}
+        defaults = YAML.load_file(config_path).deep_symbolize_keys || {}
         options = defaults.merge_with_arrays(options)
         @options = Thor::CoreExt::HashWithIndifferentAccess.new(options)
         @options_parsed = true

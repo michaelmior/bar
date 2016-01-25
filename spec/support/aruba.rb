@@ -7,17 +7,6 @@ require 'bar/cli'
 module Bar
   module CLI
     class BarCLI
-      TEST_CONFIG_FILE_NAME = File.join File.dirname(__FILE__), '..', '..',
-                                        'bar.yml.example'
-
-      def initialize(*args)
-        suppress_warnings do
-          BarCLI.const_set 'CONFIG_FILE_NAME', TEST_CONFIG_FILE_NAME
-        end
-
-        super(*args)
-      end
-
       # Override so we don't look like RSpec
       def self.basename
         'bar'

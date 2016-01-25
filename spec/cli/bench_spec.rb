@@ -36,6 +36,12 @@ module Bar::CLI
         collected = "#{Bar::DEFAULT_COLLECTORS.keys.first}.txt"
         expect(File.read(File.join('/tmp/localhost', collected))).to eq('Test')
       end
+
+      it 'reads from the configuration file' do
+        use_config command: 'echo "Foo"'
+        run_simple 'bar bench', false
+        expect(last_command_stopped.output).to eq("Foo\n")
+      end
     end
   end
 end

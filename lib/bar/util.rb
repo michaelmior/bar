@@ -1,16 +1,3 @@
-# Extend the kernel to allow warning suppression
-module Kernel
-  # Allow the suppression of warnings for a block of code
-  def suppress_warnings
-    original_verbosity = $VERBOSE
-    $VERBOSE = nil
-    result = yield
-    $VERBOSE = original_verbosity
-
-    result
-  end
-end
-
 # Add simple convenience methods
 class Object
   # Convert all the keys of a hash to symbols
